@@ -90,6 +90,85 @@ namespace _2019_Fall_Assignment2
             try
             {
                 // Write your code here
+
+                Dictionary<int, int> dict = new Dictionary<int, int>();
+                int i, j, value;
+                int k = 0;
+                int[] output = new int[nums1.Length + nums2.Length];
+
+                for (i = 0; i < nums1.Length; i++)
+                {
+                    if (dict.ContainsKey(nums1[i])) // checking if dictionary contains the number
+                    {
+
+                    }
+                    else
+                    {
+                        dict.Add(nums1[i], 1); // if not add it to the dictionary and assign a value to the key as 1
+
+                    }
+
+                }
+
+                for (j = 0; j < nums2.Length; j++)
+                {
+                    if (dict.ContainsKey(nums2[j])) // checking the second array elements with the dicitionary
+                    {
+                        dict[nums2[j]] = 2; // if it is true then change the number to 2 else it will be 1
+                    }
+
+                }
+
+                foreach (var dc in dict)
+                {
+                    dict.TryGetValue(dc.Key, out value); // getting the values in the dictionaries where they have the same elements in both arrays
+
+                    if (value == 2) // checking the values
+                    {
+                        output[k] = dc.Key; // outputting the key
+                        k++;
+                        Console.WriteLine(dc.Key);
+
+
+                    }
+
+                }
+                //int[] output2 = new int[output.Length];
+                //foreach (int p in output)
+                //{
+                //  if (output[p] == 0)
+                // {
+                //    Console.WriteLine(p);
+                //}
+                //}
+
+                return output;
+
+                for (j = 0; j < nums2.Length; j++)
+                {
+                    if (dict.ContainsKey(nums2[j]))
+                    {
+                        dict[nums2[j]] = 2;
+                    }
+
+                }
+
+                foreach (var dc in dict)
+                {
+                    dict.TryGetValue(dc.Key, out value);
+
+                    if (value == 2)
+                    {
+                        output[k] = dc.Key;
+                        k++;
+
+
+                    }
+
+                }
+
+
+                return output;
             }
             catch
             {
