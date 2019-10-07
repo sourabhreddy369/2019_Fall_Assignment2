@@ -1,0 +1,1 @@
+While resolving the problems that I took, I learned about Dictionary class and how it can help solving problems at ease. Challenging Problems like these will help me get more exposure towards the deeper version of C#. I never had C# programming experience in my profession and educational career, though I had in Python. These assignments would help be better my programming skills.
