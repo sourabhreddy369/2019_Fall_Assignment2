@@ -75,7 +75,16 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                int i = 0, j = nums.Length - 1, med;
+                while (i < j)
+                {
+                    med = i + (j - i) / 2;
+                    if (target == nums[med]) return med;
+                    if (target < nums[med]) j = med - 1;
+                    else i = med + 1;
+                }
+                if (target <= nums[i]) return i;
+                return i + 1;
             }
             catch
             {
@@ -183,6 +192,23 @@ namespace _2019_Fall_Assignment2
             try
             {
                 // Write your code here
+                int i, max = -1, value;
+                Dictionary<int, int> dict = new Dictionary<int, int>();
+                for (i = 0; i < A.Length; i++)
+                {
+                    if (dict.ContainsKey(A[i])) dict[A[i]] = 1;
+                    else dict.Add(A[i], -1);
+                }
+                for (i = 0; i < A.Length; i++)
+                {
+                    dict.TryGetValue(A[i], out value);
+                    if (value == -1)
+                    {
+                        if (A[i] > max)
+                            max = A[i];
+                    }
+                }
+                return max;
             }
             catch
             {
