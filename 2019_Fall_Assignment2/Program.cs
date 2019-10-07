@@ -11,8 +11,8 @@ namespace _2019_Fall_Assignment2
             int[] nums = { 1, 3, 5, 6 };
             Console.WriteLine("Position to insert {0} is = {1}\n", target, SearchInsert(nums, target));
 
-            int[] nums1 = { 3,6,2 };
-            int[] nums2 = { 6,3,6,7,3 };
+            int[] nums1 = { 1,2,2,1 };
+            int[] nums2 = { 2,2 };
             int[] intersect = Intersect(nums1, nums2);
             Console.WriteLine("Intersection of two arrays is: ");
             DisplayArray(intersect);
@@ -42,7 +42,8 @@ namespace _2019_Fall_Assignment2
             Console.Write("\n");
 
             string s = "abca";
-            if(ValidPalindrome(s)) {
+            if (ValidPalindrome(s))
+            {
                 Console.WriteLine("The given string \"{0}\" can be made PALINDROME", s);
             }
             else
@@ -53,7 +54,7 @@ namespace _2019_Fall_Assignment2
 
         public static void DisplayArray(int[] a)
         {
-            foreach(int n in a)
+            foreach (int n in a)
             {
                 Console.Write(n + " ");
             }
@@ -61,9 +62,9 @@ namespace _2019_Fall_Assignment2
 
         public static void Display2DArray(int[,] a)
         {
-            for(int i=0;i<a.GetLength(0);i++)
+            for (int i = 0; i < a.GetLength(0); i++)
             {
-                for(int j=0;j<a.GetLength(1);j++)
+                for (int j = 0; j < a.GetLength(1); j++)
                 {
                     Console.Write(a[i, j] + "\t");
                 }
@@ -98,8 +99,6 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
-
                 Dictionary<int, int> dict = new Dictionary<int, int>();
                 int i, j, value;
                 int k = 0;
@@ -115,35 +114,28 @@ namespace _2019_Fall_Assignment2
                     else
                     {
                         dict.Add(nums1[i], 1); // if not add it to the dictionary and assign a value to the key as 1
-
                     }
-
                 }
-
                 for (j = 0; j < nums2.Length; j++)
                 {
                     if (dict.ContainsKey(nums2[j])) // checking the second array elements with the dicitionary
                     {
-                        
-                        Console.WriteLine(nums2[j]);
-                        //dict.TryGetValue(nums2[j], out value);
-                        ////dict[nums2[j]] = ++value;
-                        //for (int y = 0; y < value; y++)
-                        //{
-                        output[k] = nums2[j];
-                        k++;
-                        //    Console.WriteLine(nums2[j]);
-
-                        //}
-
+                        dict.TryGetValue(nums2[j], out value);
+                        if (value > 0) //checking the value is greater than zero
+                        {
+                            output[k] = nums2[j];
+                            k++;
+                            dict[nums2[j]] = --value; // udpate the value once found and decrease the value 
+                        }
                     }
-
                 }
-
-
-
-                return output;
-                
+                int[] output2 = new int[k]; // creating an array to output
+                int w = 0;
+                for(w = 0; w<k; w++)
+                {
+                    output2[w] = output[w]; 
+                }
+                return output2; // returing the output
             }
             catch
             {
@@ -234,6 +226,7 @@ namespace _2019_Fall_Assignment2
 
             return new int[,] { };
         }
+
 
         public static int MinMeetingRooms(int[,] intervals)
         {
