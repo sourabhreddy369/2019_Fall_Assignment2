@@ -78,13 +78,13 @@ namespace _2019_Fall_Assignment2
                 int i = 0, j = nums.Length - 1, med;
                 while (i < j)
                 {
-                    med = i + (j - i) / 2;
-                    if (target == nums[med]) return med;
-                    if (target < nums[med]) j = med - 1;
+                    med = i + (j - i) / 2; // to find the median or mid index (quick sort)
+                    if (target == nums[med]) return med; // if the middle index is the target return
+                    if (target < nums[med]) j = med - 1; // repeat the process for first half
                     else i = med + 1;
                 }
-                if (target <= nums[i]) return i;
-                return i + 1;
+                if (target <= nums[i]) return i; // if the target index is found return the index
+                return i + 1; // 
             }
             catch
             {
