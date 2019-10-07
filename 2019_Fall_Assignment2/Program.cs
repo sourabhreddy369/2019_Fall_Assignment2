@@ -79,7 +79,7 @@ namespace _2019_Fall_Assignment2
                 int i = 0, j = nums.Length - 1, med;
                 while (i < j)
                 {
-                    med = i + (j - i) / 2; // to find the median or mid index (quick sort)
+                    med = i + (j - i) / 2; // to find the median or mid index (binary search)
                     if (target == nums[med]) return med; // if the middle index is the target return
                     if (target < nums[med]) j = med - 1; // repeat the process for first half
                     else i = med + 1;
