@@ -352,7 +352,7 @@ namespace _2019_Fall_Assignment2
                         count++;
                 }
                 //if more than one alphabet is repeated for odd number of times , it cannot be made a palindrome
-                if (count >= 2)
+                if (count > 2)
                     return false;
                 else return true;
             }
