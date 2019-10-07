@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace _2019_Fall_Assignment2
 {
@@ -116,7 +117,21 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                int i, val1, val2, time = 0;
+                Dictionary<char, int> dict = new Dictionary<char, int>();
+                for (i = 0; i < keyboard.Length; i++)
+                {
+                    dict.Add(keyboard[i], i);
+                }
+                dict.TryGetValue(word[0], out val1);
+                time = time + val1;
+                for (i = 1; i < word.Length; i++)
+                {
+                    dict.TryGetValue(word[i], out val2);
+                    time = time + ((val2 - val1) > 0 ? (val2 - val1) : (-1) * (val2 - val1));
+                    val1 = val2;
+                }
+                return time;
             }
             catch
             {
@@ -130,7 +145,16 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                int i, j, m = 0, n = 0;
+                int[,] B = new int[A.GetLength(0), A.GetLength(1)];
+                for (i = 0, m = 0; i < A.GetLength(0); i++, m++)
+                {
+                    for (j = A.GetLength(1) - 1, n = 0; j >= 0; j--, n++)
+                    {
+                        B[m, n] = (A[i, j] == 0 ? 1 : 0);
+                    }
+                }
+                return B;
             }
             catch
             {
@@ -158,7 +182,27 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                int i = 0, j = A.Length - 1, k = A.Length - 1;
+                int[] B = new int[A.Length];
+                while (i < j)
+                {
+                    if (A[i] < 0) A[i] = A[i] * (-1);
+                    if (A[j] < 0) A[j] = A[j] * (-1);
+                    if (A[i] >= A[j])
+                    {
+                        B[k] = A[i] * A[i];
+                        i++;
+                    }
+                    else
+                    {
+                        B[k] = A[j] * A[j];
+                        j--;
+                    }
+                    k--;
+                }
+                if (i == j)
+                    B[k] = A[i];
+                return B;
             }
             catch
             {
@@ -172,7 +216,20 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                int[] alpha = new int[26];
+                int i, count = 0;
+                for (i = 0; i < s.Length; i++)
+                {
+                    alpha[s[i] - 'a']++;
+                }
+                for (i = 0; i < alpha.Length; i++)
+                {
+                    if (alpha[i] % 2 != 0)
+                        count++;
+                }
+                if (count >= 2)
+                    return false;
+                else return true;
             }
             catch
             {
@@ -183,3 +240,4 @@ namespace _2019_Fall_Assignment2
         }
     }
 }
+
