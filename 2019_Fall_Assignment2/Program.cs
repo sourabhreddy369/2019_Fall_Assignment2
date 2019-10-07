@@ -11,8 +11,8 @@ namespace _2019_Fall_Assignment2
             int[] nums = { 1, 3, 5, 6 };
             Console.WriteLine("Position to insert {0} is = {1}\n", target, SearchInsert(nums, target));
 
-            int[] nums1 = { 1, 2, 2, 1 };
-            int[] nums2 = { 2, 2 };
+            int[] nums1 = { 3,6,2 };
+            int[] nums2 = { 6,3,6,7,3 };
             int[] intersect = Intersect(nums1, nums2);
             Console.WriteLine("Intersection of two arrays is: ");
             DisplayArray(intersect);
@@ -100,7 +100,8 @@ namespace _2019_Fall_Assignment2
                 {
                     if (dict.ContainsKey(nums1[i])) // checking if dictionary contains the number
                     {
-
+                        dict.TryGetValue(nums1[i], out value);
+                        dict[nums1[i]] = ++value;
                     }
                     else
                     {
@@ -114,61 +115,26 @@ namespace _2019_Fall_Assignment2
                 {
                     if (dict.ContainsKey(nums2[j])) // checking the second array elements with the dicitionary
                     {
-                        dict[nums2[j]] = 2; // if it is true then change the number to 2 else it will be 1
-                    }
-
-                }
-
-                foreach (var dc in dict)
-                {
-                    dict.TryGetValue(dc.Key, out value); // getting the values in the dictionaries where they have the same elements in both arrays
-
-                    if (value == 2) // checking the values
-                    {
-                        output[k] = dc.Key; // outputting the key
+                        
+                        Console.WriteLine(nums2[j]);
+                        //dict.TryGetValue(nums2[j], out value);
+                        ////dict[nums2[j]] = ++value;
+                        //for (int y = 0; y < value; y++)
+                        //{
+                        output[k] = nums2[j];
                         k++;
-                        Console.WriteLine(dc.Key);
+                        //    Console.WriteLine(nums2[j]);
 
-
-                    }
-
-                }
-                //int[] output2 = new int[output.Length];
-                //foreach (int p in output)
-                //{
-                //  if (output[p] == 0)
-                // {
-                //    Console.WriteLine(p);
-                //}
-                //}
-
-                return output;
-
-                for (j = 0; j < nums2.Length; j++)
-                {
-                    if (dict.ContainsKey(nums2[j]))
-                    {
-                        dict[nums2[j]] = 2;
-                    }
-
-                }
-
-                foreach (var dc in dict)
-                {
-                    dict.TryGetValue(dc.Key, out value);
-
-                    if (value == 2)
-                    {
-                        output[k] = dc.Key;
-                        k++;
-
+                        //}
 
                     }
 
                 }
+
 
 
                 return output;
+                
             }
             catch
             {
@@ -247,7 +213,42 @@ namespace _2019_Fall_Assignment2
         {
             try
             {
-                // Write your code here
+                int i, j, meetingRooms = 1, max = 1;
+                int[] start = new int[intervals.GetLength(0)];
+                int[] end = new int[intervals.GetLength(0)];
+
+                for (j = 0; j < intervals.GetLength(0); j++)
+                {
+                    start[j] = intervals[j, 0];
+                    end[j] = intervals[j, 1];
+                }
+                Array.Sort(start);
+                Array.Sort(end);
+                //Starting from second meeting's start time as the num of meeting rooms is already updated to 1
+                i = 1; j = 0;
+                //Till all the meetings we will run the loop and increment the meeting rooms
+                while (i < start.Length && j < start.Length)
+                {
+                    //if next event startes ahead of current meeting then increment the count of meeting rooms
+                    if (start[i] <= end[j])
+                    {
+                        meetingRooms++;
+                        i++;
+                        //keeping track of max number of meeting rooms required
+                        if (meetingRooms > max)
+                        {
+                            max = meetingRooms;
+                        }
+                    }
+                    else
+                    {
+                        //if next meeting starts after the current meeting ends then decrement the meeting rooms required at that point of time
+                        meetingRooms--;
+                        j++;
+                    }
+                }
+                //return the max number of meeting rooms
+                return max;
             }
             catch
             {
@@ -255,6 +256,7 @@ namespace _2019_Fall_Assignment2
             }
 
             return 0;
+
         }
 
         public static int[] SortedSquares(int[] A)
