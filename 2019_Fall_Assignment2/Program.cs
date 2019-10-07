@@ -155,23 +155,29 @@ namespace _2019_Fall_Assignment2
 
         public static int LargestUniqueNumber(int[] A)
         {
-            try
+            try  
+
             {
                 // Write your code here
                 int i, max = -1, value;
                 Dictionary<int, int> dict = new Dictionary<int, int>();
+                //traverse through the array
                 for (i = 0; i < A.Length; i++)
                 {
+                    //if the dictionary already contains the number, then update it's value as 1
                     if (dict.ContainsKey(A[i])) dict[A[i]] = 1;
+                    //if dictionary don't have the number, then add the number in dictionary and value as -1
                     else dict.Add(A[i], -1);
                 }
+                //Now all the unique elements will have -1 as value in the dictionary
                 for (i = 0; i < A.Length; i++)
                 {
                     dict.TryGetValue(A[i], out value);
                     if (value == -1)
                     {
+                        //if the value is -1, then check if the number is largest or not
                         if (A[i] > max)
-                            max = A[i];
+                            max = A[i]; 
                     }
                 }
                 return max;
