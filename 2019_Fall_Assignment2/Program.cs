@@ -196,18 +196,27 @@ namespace _2019_Fall_Assignment2
             {
                 int i, val1, val2, time = 0;
                 Dictionary<char, int> dict = new Dictionary<char, int>();
+                //Add all the elements and the index/time of those elements in the given keyboard to the dictionary
                 for (i = 0; i < keyboard.Length; i++)
                 {
                     dict.Add(keyboard[i], i);
                 }
                 dict.TryGetValue(word[0], out val1);
+                //Add the first letter's time to the value time
                 time = time + val1;
+                //for all the elements in the given word . calculate the time required to type those letters in the word
                 for (i = 1; i < word.Length; i++)
                 {
+                    //fetch the value of the letter in the word
                     dict.TryGetValue(word[i], out val2);
+                    /* find the time taken to reach this letter from the previous letter and add it to the time.
+                     * val1 is index of previos alphabet in the word, val2 is index of current alphabet
+                    * */
                     time = time + ((val2 - val1) > 0 ? (val2 - val1) : (-1) * (val2 - val1));
+                    //Update the val1 to val2(value of current alphabet)
                     val1 = val2;
                 }
+                //return the time taken to type the entire word
                 return time;
             }
             catch
@@ -228,6 +237,7 @@ namespace _2019_Fall_Assignment2
                 {
                     for (j = A.GetLength(1) - 1, n = 0; j >= 0; j--, n++)
                     {
+                        //Read each row in reverse direction and invert the element of the array A at that position and place it in Array B
                         B[m, n] = (A[i, j] == 0 ? 1 : 0);
                     }
                 }
@@ -295,25 +305,32 @@ namespace _2019_Fall_Assignment2
             try
             {
                 int i = 0, j = A.Length - 1, k = A.Length - 1;
+                //create an array of same length
                 int[] B = new int[A.Length];
+                //Start i from beginning index and j from end index of array
                 while (i < j)
                 {
+                    //Convert negative numbers to positive
                     if (A[i] < 0) A[i] = A[i] * (-1);
                     if (A[j] < 0) A[j] = A[j] * (-1);
+                    //check for largest value and square it and add it in the end in new array
                     if (A[i] >= A[j])
                     {
                         B[k] = A[i] * A[i];
+                        //if the largest element is in the beginning then as the sqaure of it is added in new array, increase i
                         i++;
                     }
                     else
                     {
                         B[k] = A[j] * A[j];
+                        //if largest element is in the end , as it's square is added in new array, decrement the value of j
                         j--;
                     }
+                    //decrease the end index of new array
                     k--;
                 }
                 if (i == j)
-                    B[k] = A[i];
+                    B[k] = A[i] * A[i];
                 return B;
             }
             catch
@@ -326,12 +343,15 @@ namespace _2019_Fall_Assignment2
 
         public static bool ValidPalindrome(string s)
         {
+            //Keep count of all alphabets in given string, if any two or more than two among them repeated odd number of times then 
+            //the string cannot be made into palindrome.
             try
             {
                 int[] alpha = new int[26];
                 int i, count = 0;
                 for (i = 0; i < s.Length; i++)
                 {
+                    //increment the count of alphabets in string
                     alpha[s[i] - 'a']++;
                 }
                 for (i = 0; i < alpha.Length; i++)
@@ -339,6 +359,7 @@ namespace _2019_Fall_Assignment2
                     if (alpha[i] % 2 != 0)
                         count++;
                 }
+                //if more than one alphabet is repeated for odd number of times , it cannot be made a palindrome
                 if (count >= 2)
                     return false;
                 else return true;
