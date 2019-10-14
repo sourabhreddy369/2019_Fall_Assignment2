@@ -335,26 +335,27 @@ namespace _2019_Fall_Assignment2
 
         public static bool ValidPalindrome(string s)
         {
-            //Keep count of all alphabets in given string, if any two or more than two among them repeated odd number of times then 
-            //the string cannot be made into palindrome.
+            //check the alphabets from beginning and ending. If more than 2 individual characters appears int he string, then return false
             try
             {
-                int[] alpha = new int[26];
-                int i, count = 0;
-                for (i = 0; i < s.Length; i++)
+                int i = 0, j = s.Length - 1, del = 0;
+                while (i < j)
                 {
-                    //increment the count of alphabets in string
-                    alpha[s[i] - 'a']++;
+                    if (s[i] == s[j])
+                    {
+                        i++;
+                        j--;
+                    }
+                    else
+                    {
+                        del++;
+                        j--;
+                    }
+                    if (del >= 2)
+                        return false;
                 }
-                for (i = 0; i < alpha.Length; i++)
-                {
-                    if (alpha[i] % 2 != 0)
-                        count++;
-                }
-                //if more than one alphabet is repeated for odd number of times , it cannot be made a palindrome
-                if (count > 2)
-                    return false;
-                else return true;
+                if (i >= j)
+                    return true;
             }
             catch
             {
